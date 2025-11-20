@@ -127,7 +127,6 @@ router.put("/players/:id", (req, res) => {
           message: "Jugador no encontrado",
         });
       }
-
       if (nickname && nickname !== player.nickname) {
         return Player.findOne({ nickname: nickname }).then((existingPlayer) => {
           if (existingPlayer) {
@@ -135,22 +134,18 @@ router.put("/players/:id", (req, res) => {
               message: "El nickname ya está siendo utilizado por otro jugador",
             });
           }
-
           player.nickname = nickname;
           player.name = name || player.name;
           player.country = country || player.country;
           player.birthDate = birthDate || player.birthDate;
           player.role = role || player.role;
-
           return player.save();
         });
       }
-
       player.name = name || player.name;
       player.country = country || player.country;
       player.birthDate = birthDate || player.birthDate;
       player.role = role || player.role;
-
       return player.save();
     })
     .then((player) => {
