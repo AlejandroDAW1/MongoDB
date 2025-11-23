@@ -81,9 +81,9 @@ router.post("/players", async (req, res) => {
       });
     }
 
-    const existingPlayer = await Player.findOne({ nickname });
+    const JugadorExistente = await Player.findOne({ nickname });
 
-    if (existingPlayer) {
+    if (JugadorExistente) {
       return res.status(400).json({
         message: "El nickname ya está registrado",
       });
@@ -124,9 +124,9 @@ router.put("/players/:id", async (req, res) => {
       });
     }
     if (nickname && nickname !== player.nickname) {
-      const existingPlayer = await Player.findOne({ nickname });
+      const JugadorExistente = await Player.findOne({ nickname });
 
-      if (existingPlayer) {
+      if (JugadorExistente) {
         return res.status(400).json({
           message: "El nickname ya está siendo utilizado por otro jugador",
         });
@@ -140,11 +140,11 @@ router.put("/players/:id", async (req, res) => {
     player.birthDate = birthDate || player.birthDate;
     player.role = role || player.role;
 
-    const updatedPlayer = await player.save();
+    const JugadorActualizado = await player.save();
 
     res.status(200).json({
       message: "El jugador se ha actualizado correctamente",
-      player: updatedPlayer,
+      player: JugadorActualizado,
     });
   } catch (error) {
     res.status(500).json({
@@ -165,23 +165,23 @@ router.delete("/players/:id", async (req, res) => {
       });
     }
 
-    const activeTeam = await Team.findOne({
+    const EquipoACtivo = await Team.findOne({
       "roster.player": playerId,
       "roster.active": true,
     });
 
-    if (activeTeam) {
+    if (EquipoACtivo) {
       return res.status(400).json({
         message:
           "No se puede eliminar el jugador porque está activo en algún equipo.",
       });
     }
 
-    const deletedPlayer = await Player.findByIdAndRemove(playerId);
+    const JugadorBorrado = await Player.findByIdAndRemove(playerId);
 
     res.status(200).json({
       message: "El jugador se ha eliminado correctamente",
-      player: deletedPlayer,
+      player: JugadorBorrado,
     });
   } catch (error) {
     res.status(500).json({
