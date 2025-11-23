@@ -177,7 +177,7 @@ router.delete("/players/:id", async (req, res) => {
       });
     }
 
-    const JugadorBorrado = await Player.findByIdAndRemove(playerId);
+    const JugadorBorrado = await Player.findOneAndDelete({ _id: playerId });
 
     res.status(200).json({
       message: "El jugador se ha eliminado correctamente",

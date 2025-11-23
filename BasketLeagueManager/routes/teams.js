@@ -201,6 +201,7 @@ router.delete("/teams/:id", async (req, res) => {
         message: "Equipo no encontrado.",
       });
     }
+
     let tienePartidos = await Match.findOne({
       $or: [{ homeTeam: teamId }, { awayTeam: teamId }],
     });
@@ -211,7 +212,7 @@ router.delete("/teams/:id", async (req, res) => {
       });
     }
 
-    let eliminado = await Team.findByIdAndRemove(teamId);
+    let eliminado = await Team.findOneAndDelete({ _id: teamId });
 
     res.status(200).json({
       message: "El equipo se ha eliminado correctamente",

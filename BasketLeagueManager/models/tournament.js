@@ -1,4 +1,4 @@
-import mongoose, { Schema } from "mongoose";
+const mongoose = require("mongoose")
 
 const tournamentSchema = new Schema({
   title: {
@@ -31,5 +31,4 @@ const tournamentSchema = new Schema({
   ],
 });
 
-const Tournament = mongoose.model("Tournament", tournamentSchema);
-export default Tournament;
+module.exports = mongoose.model("Tournament", tournamentSchema);

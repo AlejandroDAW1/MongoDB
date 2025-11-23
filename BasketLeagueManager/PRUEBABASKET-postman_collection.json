@@ -1,8 +1,8 @@
 {
   "info": {
-    "name": "DAW Basket API",
-    "_postman_id": "basket-collection-daw",
-    "description": "Colección para pruebas de players, teams y matches",
+    "name": "DAW Basket API - puerto 8080",
+    "_postman_id": "basket-collection-daw-8080",
+    "description": "Colección para pruebas de players, teams y matches con servidor en localhost:8080",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
@@ -13,45 +13,38 @@
           "name": "GET /players - OK",
           "request": {
             "method": "GET",
-            "url": "http://localhost:3000/players"
-          },
-          "event": [{ "listen": "test", "script": { "exec": ["pm.response.to.have.status(200);"] } }]
+            "url": "http://localhost:8080/players"
+          }
         },
         {
           "name": "GET /players - 404",
           "request": {
             "method": "GET",
-            "url": "http://localhost:3000/players?empty=true"
-          },
-          "event": [
-            {
-              "listen": "test",
-              "script": { "exec": ["pm.response.to.have.status(404);"] }
-            }
-          ]
+            "url": "http://localhost:8080/players=0"
+          }
         },
         {
           "name": "GET /players/:id - OK",
           "request": {
             "method": "GET",
-            "url": "http://localhost:3000/players/ID_CORRECTO"
+            "url": "http://localhost:8080/players/IDExistente"
           }
         },
         {
           "name": "GET /players/:id - 404",
           "request": {
             "method": "GET",
-            "url": "http://localhost:3000/players/000000000000000000000000"
+            "url": "http://localhost:8080/players/777777777777777777777777"
           }
         },
         {
           "name": "POST /players - OK",
           "request": {
             "method": "POST",
-            "url": "http://localhost:3000/players",
+            "url": "http://localhost:8080/players",
             "body": {
               "mode": "raw",
-              "raw": "{\"nickname\":\"prueba123\",\"name\":\"Jugador Test\",\"country\":\"Spain\",\"birthDate\":\"2000-01-01\",\"role\":\"Base\"}"
+              "raw": "{\"nickname\":\"prueba123\",\"name\":\"test\",\"country\":\"ES\",\"birthDate\":\"2000-06-09\",\"role\":\"Base\"}"
             }
           }
         },
@@ -59,7 +52,7 @@
           "name": "POST /players - 400 faltan datos",
           "request": {
             "method": "POST",
-            "url": "http://localhost:3000/players",
+            "url": "http://localhost:8080/players",
             "body": {
               "mode": "raw",
               "raw": "{\"nickname\":\"x\"}"
@@ -70,34 +63,43 @@
           "name": "DELETE /players/:id - 404",
           "request": {
             "method": "DELETE",
-            "url": "http://localhost:3000/players/000000000000000000000000"
+            "url": "http://localhost:8080/players/777777777777777777777777"
           }
         }
       ]
     },
-
     {
       "name": "Teams",
       "item": [
         {
           "name": "GET /teams - OK",
-          "request": { "method": "GET", "url": "http://localhost:3000/teams" }
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/teams"
+          }
+        },
+        {
+          "name": "GET /teams/:id - OK",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/teams/TeamID"
+          }
         },
         {
           "name": "GET /teams/:id - 404",
           "request": {
             "method": "GET",
-            "url": "http://localhost:3000/teams/000000000000000000000000"
+            "url": "http://localhost:8080/teams/777777777777777777777777"
           }
         },
         {
           "name": "POST /teams - OK",
           "request": {
             "method": "POST",
-            "url": "http://localhost:3000/teams",
+            "url": "http://localhost:8080/teams",
             "body": {
               "mode": "raw",
-              "raw": "{\"name\":\"Equipo Test\",\"country\":\"Spain\"}"
+              "raw": "{\"name\":\"Equipo Test\"}"
             }
           }
         },
@@ -105,23 +107,29 @@
           "name": "POST /teams - 400 faltan datos",
           "request": {
             "method": "POST",
-            "url": "http://localhost:3000/teams",
+            "url": "http://localhost:8080/teams",
             "body": {
               "mode": "raw",
-              "raw": "{\"name\":\"Equipo sin country\"}"
+              "raw": "{\"name\":\"\"}"
             }
+          }
+        },
+        {
+          "name": "DELETE /teams/:id - OK",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/teams/TeamID"
           }
         },
         {
           "name": "DELETE /teams/:id - 404",
           "request": {
             "method": "DELETE",
-            "url": "http://localhost:3000/teams/000000000000000000000000"
+            "url": "http://localhost:8080/teams/777777777777777777777777"
           }
         }
       ]
     },
-
     {
       "name": "Matches",
       "item": [
@@ -129,38 +137,38 @@
           "name": "GET /matches - OK",
           "request": {
             "method": "GET",
-            "url": "http://localhost:3000/matches"
+            "url": "http://localhost:8080/matches"
           }
         },
         {
           "name": "GET /matches - 404",
           "request": {
             "method": "GET",
-            "url": "http://localhost:3000/matches?empty=true"
+            "url": "http://localhost:8080/matches=0"
           }
         },
         {
           "name": "GET /matches/:id - OK",
           "request": {
             "method": "GET",
-            "url": "http://localhost:3000/matches/ID_CORRECTO"
+            "url": "http://localhost:8080/matches/IDExistente"
           }
         },
         {
           "name": "GET /matches/:id - 404",
           "request": {
             "method": "GET",
-            "url": "http://localhost:3000/matches/000000000000000000000000"
+            "url": "http://localhost:8080/matches/777777777777777777777777"
           }
         },
         {
           "name": "POST /matches - OK",
           "request": {
             "method": "POST",
-            "url": "http://localhost:3000/matches",
+            "url": "http://localhost:8080/matches",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"tournament\": \"WorldCup2024\",\n  \"date\": \"2024-02-20\",\n  \"stage\": \"Group\",\n  \"homeTeam\": \"ID_HOME\",\n  \"awayTeam\": \"ID_AWAY\",\n  \"homeScore\": 80,\n  \"awayScore\": 70\n}"
+              "raw": "{\n  \"tournament\": \"Mundial2026\",\n  \"date\": \"2026-06-20\",\n  \"stage\": \"Group\",\n  \"homeTeam\": \"idHome\",\n  \"awayTeam\": \"IdAway\",\n  \"homeScore\": 3,\n  \"awayScore\": 2\n}"
             }
           }
         },
@@ -168,10 +176,10 @@
           "name": "POST /matches - 400 faltan campos",
           "request": {
             "method": "POST",
-            "url": "http://localhost:3000/matches",
+            "url": "http://localhost:8080/matches",
             "body": {
               "mode": "raw",
-              "raw": "{\"tournament\":\"WorldCup2024\"}"
+              "raw": "{\"tournament\":\"Mundial2026\"}"
             }
           }
         },
@@ -179,18 +187,25 @@
           "name": "POST /matches - 400 equipos iguales",
           "request": {
             "method": "POST",
-            "url": "http://localhost:3000/matches",
+            "url": "http://localhost:8080/matches",
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"tournament\":\"Test\",\n  \"date\":\"2024-01-01\",\n  \"stage\":\"Group\",\n  \"homeTeam\":\"123\",\n  \"awayTeam\":\"123\",\n  \"homeScore\":10,\n  \"awayScore\":5\n}"
+              "raw": "{\n  \"tournament\":\"Test\",\n  \"date\":\"2025-11-24\",\n  \"stage\":\"Group\",\n  \"homeTeam\":\"123\",\n  \"awayTeam\":\"123\",\n  \"homeScore\":10,\n  \"awayScore\":5\n}"
             }
+          }
+        },
+        {
+          "name": "DELETE /matches/:id - ok",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:8080/matches/IdPartido"
           }
         },
         {
           "name": "DELETE /matches/:id - 404",
           "request": {
             "method": "DELETE",
-            "url": "http://localhost:3000/matches/000000000000000000000000"
+            "url": "http://localhost:8080/matches/777777777777777777777777"
           }
         }
       ]

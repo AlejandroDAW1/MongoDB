@@ -90,7 +90,6 @@ router.post("/matches", async (req, res) => {
       awayTeam,
       homeScore,
       awayScore,
-      playerStats: playerStats || [],
     });
 
     const partidoGuardado = await nuevoPartido.save();

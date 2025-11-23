@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "express": "^5.1.0",
-    "mongoose": "^8.19.4"
+    "mongoose": "^8.20.1"
   },
   "name": "basketleaguemanager",
   "version": "1.0.0",
