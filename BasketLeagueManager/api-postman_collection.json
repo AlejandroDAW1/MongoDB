@@ -1,0 +1,199 @@
+{
+  "info": {
+    "name": "DAW Basket API",
+    "_postman_id": "basket-collection-daw",
+    "description": "Colección para pruebas de players, teams y matches",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Players",
+      "item": [
+        {
+          "name": "GET /players - OK",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/players"
+          },
+          "event": [{ "listen": "test", "script": { "exec": ["pm.response.to.have.status(200);"] } }]
+        },
+        {
+          "name": "GET /players - 404",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/players?empty=true"
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": { "exec": ["pm.response.to.have.status(404);"] }
+            }
+          ]
+        },
+        {
+          "name": "GET /players/:id - OK",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/players/ID_CORRECTO"
+          }
+        },
+        {
+          "name": "GET /players/:id - 404",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/players/000000000000000000000000"
+          }
+        },
+        {
+          "name": "POST /players - OK",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/players",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nickname\":\"prueba123\",\"name\":\"Jugador Test\",\"country\":\"Spain\",\"birthDate\":\"2000-01-01\",\"role\":\"Base\"}"
+            }
+          }
+        },
+        {
+          "name": "POST /players - 400 faltan datos",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/players",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"nickname\":\"x\"}"
+            }
+          }
+        },
+        {
+          "name": "DELETE /players/:id - 404",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/players/000000000000000000000000"
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Teams",
+      "item": [
+        {
+          "name": "GET /teams - OK",
+          "request": { "method": "GET", "url": "http://localhost:3000/teams" }
+        },
+        {
+          "name": "GET /teams/:id - 404",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/teams/000000000000000000000000"
+          }
+        },
+        {
+          "name": "POST /teams - OK",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/teams",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Equipo Test\",\"country\":\"Spain\"}"
+            }
+          }
+        },
+        {
+          "name": "POST /teams - 400 faltan datos",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/teams",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"Equipo sin country\"}"
+            }
+          }
+        },
+        {
+          "name": "DELETE /teams/:id - 404",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/teams/000000000000000000000000"
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "Matches",
+      "item": [
+        {
+          "name": "GET /matches - OK",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/matches"
+          }
+        },
+        {
+          "name": "GET /matches - 404",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/matches?empty=true"
+          }
+        },
+        {
+          "name": "GET /matches/:id - OK",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/matches/ID_CORRECTO"
+          }
+        },
+        {
+          "name": "GET /matches/:id - 404",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:3000/matches/000000000000000000000000"
+          }
+        },
+        {
+          "name": "POST /matches - OK",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/matches",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tournament\": \"WorldCup2024\",\n  \"date\": \"2024-02-20\",\n  \"stage\": \"Group\",\n  \"homeTeam\": \"ID_HOME\",\n  \"awayTeam\": \"ID_AWAY\",\n  \"homeScore\": 80,\n  \"awayScore\": 70\n}"
+            }
+          }
+        },
+        {
+          "name": "POST /matches - 400 faltan campos",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/matches",
+            "body": {
+              "mode": "raw",
+              "raw": "{\"tournament\":\"WorldCup2024\"}"
+            }
+          }
+        },
+        {
+          "name": "POST /matches - 400 equipos iguales",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:3000/matches",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tournament\":\"Test\",\n  \"date\":\"2024-01-01\",\n  \"stage\":\"Group\",\n  \"homeTeam\":\"123\",\n  \"awayTeam\":\"123\",\n  \"homeScore\":10,\n  \"awayScore\":5\n}"
+            }
+          }
+        },
+        {
+          "name": "DELETE /matches/:id - 404",
+          "request": {
+            "method": "DELETE",
+            "url": "http://localhost:3000/matches/000000000000000000000000"
+          }
+        }
+      ]
+    }
+  ]
+}
