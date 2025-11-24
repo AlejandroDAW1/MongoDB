@@ -1,10 +1,4 @@
 {
-  "info": {
-    "name": "DAW Basket API - puerto 8080",
-    "_postman_id": "basket-collection-daw-8080",
-    "description": "Colección para pruebas de players, teams y matches con servidor en localhost:8080",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-  },
   "item": [
     {
       "name": "Players",
